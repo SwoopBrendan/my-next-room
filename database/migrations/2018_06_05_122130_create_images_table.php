@@ -19,11 +19,11 @@ class CreateImagesTable extends Migration
             $table->string('type');
             $table->string('path');
             $table->string('full_path');
-            $table->string('original_name');
-            $table->string('ext');
-            $table->string('size');
-            $table->string('width');
-            $table->string('height');
+            $table->string('original_name')->nullable();
+            $table->string('ext')->nullable();
+            $table->string('size')->nullable();
+            $table->string('width')->nullable();
+            $table->string('height')->nullable();
             $table->timestamps();
         });
     }
