@@ -25,8 +25,8 @@ class CreateRoomsTable extends Migration
             $table->integer('lease_term_max')->nullable()->unsigned();
             $table->integer('room_count')->nullable()->unsigned();
             $table->integer('bathroom_count')->nullable()->unsigned();
-            $table->string('payment_scheme_id');
-            $table->string('location_id');
+            $table->integer('location_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }
