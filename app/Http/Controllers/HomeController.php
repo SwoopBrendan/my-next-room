@@ -24,10 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $extras = $this->service->getExtras();
-
         return view('home')->with([
-            'extras' => $extras
+            'extras'        => $this->service->getExtras(),
+            'requirements'  => $this->service->getRequirements(),
         ]);
     }
 }

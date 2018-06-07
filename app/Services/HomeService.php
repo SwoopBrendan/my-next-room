@@ -8,8 +8,5 @@ use App\Extra;
  */
 class HomeService extends Service
 {
-    public function getExtras()
-    {
-        return Extra::all();
-    }
+
 }
