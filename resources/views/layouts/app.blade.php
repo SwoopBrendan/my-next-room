@@ -25,25 +25,7 @@
     <div id="app">
         @include('partials.top-nav')
 
-        <div class="row">
-            @guest
-                <div class="col-md-12">
-                    @yield('content')
-                </div>
-            @else
-                <div class="col-md-2">
-                    @include('partials.user-detail-block')
-
-                    @include('partials.side-filter')
-                </div>
-
-                <div class="col-md-10">
-                    <div class="main-content">
-                        @yield('content')
-                    </div>
-                </div>
-            @endguest
-        </div>
+        @yield('content')
     </div>
 </body>
 </html>

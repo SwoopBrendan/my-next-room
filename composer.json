@@ -49,8 +49,10 @@
             "@php artisan package:discover"
         ],
         "post-install-cmd": [
+            "php artisan down",
             "php artisan migrate:fresh --seed",
-            "composer dumpautoload"
+            "composer dumpautoload",
+            "php artisan up"
         ]
     },
     "config": {
