@@ -1,23 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="card room-card text-center">
+                <a href="#">
+                    <img class="card-img-top" src="http://via.placeholder.com/200x200" alt="Card image cap">
+                    <div class="card-header">Bedroom with En-Suite</div>
+                    <div class="card-body">
+                        Double volume bedroom with en-suit bathroom
+                    </div>
+                    <div class="card-footer">
+                        City Bowl, Gardens, 8001
+                    </div>
+                </a>
             </div>
         </div>
     </div>
-</div>
 @endsection

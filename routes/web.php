@@ -21,3 +21,20 @@ Route::get('/redirect', 'SocialAuthFacebookController@redirect');
 Route::get('/callback', 'SocialAuthFacebookController@callback');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Logged In Routes
+Route::group(
+    ['middleware' => ['auth']], function () {
+
+    // User Routes
+    Route::group([
+        'prefix'        => 'user',
+    ], function () {
+
+        /**
+         * Admin User routes
+         */
+        Route::resource('users', 'UserController');
+
+    });
+});

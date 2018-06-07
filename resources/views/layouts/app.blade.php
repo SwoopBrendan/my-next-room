@@ -19,14 +19,31 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
         @include('partials.top-nav')
 
-        <main class="content">
-            @yield('content')
-        </main>
+        <div class="row">
+            @guest
+                <div class="col-md-12">
+                    @yield('content')
+                </div>
+            @else
+                <div class="col-md-2">
+                    @include('partials.user-detail-block')
+
+                    @include('partials.side-filter')
+                </div>
+
+                <div class="col-md-10">
+                    <div class="main-content">
+                        @yield('content')
+                    </div>
+                </div>
+            @endguest
+        </div>
     </div>
 </body>
 </html>
