@@ -19,14 +19,19 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
+
+@include('partials.header')
+
 <body>
     <div id="app">
         @include('partials.top-nav')
 
-        <main class="content">
-            @yield('content')
-        </main>
+        @yield('content')
     </div>
 </body>
+
+@include('partials.footer')
+
 </html>

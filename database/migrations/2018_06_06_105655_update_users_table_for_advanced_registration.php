@@ -14,7 +14,7 @@ class UpdateUsersTableForAdvancedRegistration extends Migration
     public function up()
     {
         Schema::table('users', function(Blueprint $table) {
-            $table->string('bio')->nullable();
+            $table->string('bio', 500)->nullable();
             $table->string('profile_picture')->nullable();
             $table->integer('profile_complete_percentage')->default(0);
         });

@@ -1,0 +1,30 @@
+.main-content {
+    margin-right: 30px;
+    margin-top: 30px;
+}
+
+.user-card {
+    margin-left: 30px;
+    margin-top: 30px;
+    background-color: inherit;
+    border: none;
+}
+
+.side-filter-card {
+    margin-top: 15px;
+}
+
+.room-cards{
+    margin-top: 15px;
+}
+
+.room-card {
+    margin-bottom: 30px;
+}
+.room-card a{
+    color: black;
+
+}
+.room-card a:hover{
+    text-decoration: none;
+}

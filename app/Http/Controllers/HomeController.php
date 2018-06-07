@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\HomeService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * HomeController constructor.
      *
-     * @return void
+     * @param HomeService $service
      */
-    public function __construct()
+    public function __construct(HomeService $service)
     {
-        $this->middleware('auth');
+        $this->service = $service;
     }
 
     /**
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home')->with([
+            'extras'        => $this->service->getExtras(),
+            'requirements'  => $this->service->getRequirements(),
+        ]);
     }
 }

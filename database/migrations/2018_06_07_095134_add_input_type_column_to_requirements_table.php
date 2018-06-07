@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExtrasTable extends Migration
+class AddInputTypeColumnToRequirementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateExtrasTable extends Migration
      */
     public function up()
     {
-        Schema::create('extras', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('slug');
-            $table->string('description')->nullable();
+        Schema::table('requirements', function(Blueprint $table) {
             $table->string('input_type');
-            $table->timestamps();
         });
     }
 
@@ -30,6 +25,8 @@ class CreateExtrasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('extras');
+        Schema::table('requirements', function(Blueprint $table) {
+            $table->dropColumn('input_type');
+        });
     }
 }
