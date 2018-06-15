@@ -17,24 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/redirect', 'SocialAuthFacebookController@redirect');
-Route::get('/callback', 'SocialAuthFacebookController@callback');
-
 // Logged In Routes
 Route::group(
     ['middleware' => ['auth']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
-    // User Routes
-    Route::group([
-        'prefix'        => 'user',
-    ], function () {
+    Route::resource('room', 'RoomController');
 
-        /**
-         * Admin User routes
-         */
-        Route::resource('users', 'UserController');
-
-    });
+    Route::resource('user', 'RoomController');
 });

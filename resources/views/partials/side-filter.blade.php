@@ -30,13 +30,13 @@
 
         {{-- Room Detail Filters --}}
         <div class="form-group">
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="(R) min rent">
+            <input type="text" class="form-control" placeholder="(R) min rent">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="(R) max rent">
+            <input type="text" class="form-control" placeholder="(R) max rent">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Available From">
+            <input type="text" class="form-control" placeholder="Available From">
         </div>
         {{-- Room Detail Filters End --}}
 

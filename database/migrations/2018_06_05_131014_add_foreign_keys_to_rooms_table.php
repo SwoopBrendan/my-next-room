@@ -13,7 +13,7 @@ class AddForeignKeysToRoomsTable extends Migration
      */
     public function up()
     {
-        Schema::table('rooms', function (Blueprint $table) {
+        Schema::table('room', function (Blueprint $table) {
             $table->foreign('user_id', 'rooms_users_fk')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('location_id', 'rooms_locations_fk')->references('id')->on('locations')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
@@ -26,7 +26,7 @@ class AddForeignKeysToRoomsTable extends Migration
      */
     public function down()
     {
-        Schema::table('rooms', function (Blueprint $table) {
+        Schema::table('room', function (Blueprint $table) {
             $table->dropForeign('rooms_users_fk');
             $table->dropForeign('rooms_locations_fk');
         });
