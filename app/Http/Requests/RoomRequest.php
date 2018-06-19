@@ -24,16 +24,16 @@ class RoomRequest extends FormRequest
     public function rules()
     {
         return [
-            'location-id'      => 'required',
+            'locations'        => 'required',
             'name'             => 'required',
             'description'      => 'required',
             'length'           => '',
             'width'            => '',
             'rent'             => 'required',
-            'deposit'          => '',
+            'deposit'          => 'required',
             'lease-min'        => '',
             'lease-max'        => '',
-            'available-from'   => 'required',
+            'available-from'   => '',
             'available-to'     => '',
             'rooms'            => '',
             'bathrooms'        => '',

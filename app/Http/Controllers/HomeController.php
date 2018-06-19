@@ -27,6 +27,7 @@ class HomeController extends Controller
         return view('home')->with([
             'extras'        => $this->service->getExtras(),
             'requirements'  => $this->service->getRequirements(),
+            'greaterAreas'  => $this->service->getGreaterAreas()
         ]);
     }
 }

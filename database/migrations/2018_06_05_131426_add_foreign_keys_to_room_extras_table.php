@@ -14,7 +14,7 @@ class AddForeignKeysToRoomExtrasTable extends Migration
     public function up()
     {
         Schema::table('room_extras', function (Blueprint $table) {
-            $table->foreign('room_id', 'room_extras_room_fk')->references('id')->on('room')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('room_id', 'room_extras_room_fk')->references('id')->on('rooms')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('extra_id', 'room_extras_extra_fk')->references('id')->on('extras')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
     }

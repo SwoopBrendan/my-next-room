@@ -18,9 +18,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-
     @yield('styles')
 
 </head>
@@ -29,15 +26,67 @@
     @include('partials.header')
 
     <div id="app">
+
         @include('partials.top-nav')
 
+        <div class="container-fluid session-notification">
+            @if (Session::has('error'))
+                @include('partials.alert-error')
+            @endif
+
+            @if (Session::has('success'))
+                @include('partials.alert-success')
+            @endif
+
+            @if (Session::has('info'))
+                @include('partials.alert-info')
+            @endif
+        </div>
+
         @yield('content')
+
     </div>
 
     @include('partials.footer')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('components/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('components/jqueryui/jquery-ui.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            $('#greater-areas').change(function () {
+
+                let locations = $('#locations');
+
+                locations.prop("disabled", true);
+
+                $.ajax({
+                    url: 'getLocations/'+this.value,
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function(json_response){
+
+                        locations.prop("disabled", false);
+
+                        let response_array = JSON.parse(json_response);
+                        let listItems = '';
+
+                        for (var i = 0; i < response_array.length; i++) {
+                            listItems += "<option value='" + response_array[i].id + "'>" + response_array[i].name + "</option>";
+                        }
+
+                        locations.html(listItems);
+
+                    }
+                });
+
+            });
+
+        });
+    </script>
 
     @yield('scripts')
 

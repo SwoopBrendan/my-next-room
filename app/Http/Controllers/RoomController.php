@@ -1,8 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use App\Helpers\ExceptionHelper;
 use App\Http\Requests\RoomRequest;
 use App\Services\RoomService;
 use Illuminate\Http\Request;
+use Throwable;
 
 class RoomController extends Controller
 {
@@ -26,16 +28,14 @@ class RoomController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Show create room form
      */
     public function create()
     {
         return view('pages.room.create')->with([
             'extras'        => $this->service->getExtras(),
             'requirements'  => $this->service->getRequirements(),
-            'greaterAreas'  => $this->getGreaterAreas()
+            'greaterAreas'  => $this->service->getGreaterAreas()
         ]);
     }
 
@@ -43,10 +43,27 @@ class RoomController extends Controller
      * Create new Room
      *
      * @param RoomRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(RoomRequest $request)
     {
-        //
+        try {
+
+            $this->service->saveRoom($request);
+
+            return redirect()->to('user')->with([
+               'success' => 'Room Created Successfully'
+            ]);
+
+        } catch (Throwable $t) {
+
+            ExceptionHelper::outputAndLog($t, 'Room Create Failed');
+
+            return redirect()->to('room/create')->with([
+                'error' => 'Room Create Failed'
+            ]);
+
+        }
     }
 
     /**
@@ -94,15 +111,8 @@ class RoomController extends Controller
         //
     }
 
-    public function getGreaterAreas()
+    public function getLocations($greaterAreaId)
     {
-        return $this->service->getGreaterAreas();
-    }
-
-    public function getLocations(Request $request)
-    {
-        return json_encode(['hello', 'world']);
-
-//        return json_encode($this->service->getLocations($request->get('greaterAreaId')));
+        return json_encode($this->service->getLocations($greaterAreaId));
     }
 }
