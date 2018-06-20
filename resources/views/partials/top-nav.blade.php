@@ -21,6 +21,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/room/create') }}">Advertise</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/user/inbox') }}">Inbox (5)</a>
+                </li>
             @endguest
         </ul>
 

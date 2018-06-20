@@ -1,11 +1,21 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
-
+use App\Room;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
+/**
+ * Class UserController
+ * @package App\Http\Controllers
+ */
 class UserController extends Controller
 {
+
+    public function __construct(UserService $userService)
+    {
+        $this->service = $userService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +23,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('pages.user.user-dashboard');
+        /** @var Room $userRooms */
+        $userRooms = $this->service->getUserRooms();
+
+        return view('pages.user.user-dashboard')->with([
+            'userRooms' => $userRooms
+        ]);
     }
 
     /**
@@ -80,5 +95,13 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function inbox()
+    {
+        return view('pages.user.user-inbox');
     }
 }
