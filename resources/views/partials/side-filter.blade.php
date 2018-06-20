@@ -4,7 +4,7 @@
     </div>
     <form>
         <div class="form-group">
-            <select class="form-control" name="greater-areas" id="greater-areas">
+            <select class="form-control" name="greater_areas" id="greater_areas">
                 <option value="" selected disabled>Select Greater Area</option>
                 @foreach($greaterAreas as $value => $area)
                     <option value="{{ $area->id }}">{{ $area->name }}</option>

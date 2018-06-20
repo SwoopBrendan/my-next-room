@@ -18,6 +18,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('components/summernote/dist/summernote.css') }}" rel="stylesheet">
 
     @yield('styles')
 
@@ -54,12 +55,13 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('components/jquery/jquery.js') }}"></script>
     <script src="{{ asset('components/jqueryui/jquery-ui.js') }}"></script>
+    <script src="{{ asset('components/summernote/dist/summernote.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {
             var $j = jQuery.noConflict();
 
-            $('#greater-areas').change(function () {
+            $('#greater_areas').change(function () {
 
                 let locations = $('#locations');
 
@@ -86,6 +88,8 @@
                 });
 
             });
+
+            $('#summernote').summernote();
 
         });
     </script>

@@ -23,16 +23,16 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group{{ $errors->has('greater-areas') ? ' has-error' : '' }}">
-                                        <select class="form-control" name="greater-areas" id="greater-areas">
+                                    <div class="form-group{{ $errors->has('greater_areas') ? ' has-error' : '' }}">
+                                        <select class="form-control" name="greater_areas" id="greater_areas">
                                             <option value="" selected disabled>Select Greater Area</option>
                                             @foreach($greaterAreas as $value => $area)
-                                                <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                <option value="{{ $area->id }}" {{ old('greater_areas') == $area->id ? 'selected' : '' }}>{{ $area->name }}</option>
                                             @endforeach
                                         </select>
-                                        @if ($errors->has('greater-areas'))
+                                        @if ($errors->has('greater_areas'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('greater-areas') }}</strong>
+                                                <strong>{{ $errors->first('greater_areas') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                                        <textarea class="form-control" name="description" id="description" placeholder="Enter Room Description *" cols="30" rows="10">{{ old('description') }}</textarea>
+                                        <textarea class="form-control" name="description" id="summernote" placeholder="Enter Room Description *" cols="30" rows="10">{{ old('description') }}</textarea>
                                         @if ($errors->has('description'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('description') }}</strong>
@@ -290,9 +290,15 @@
                         <div class="card-header">Room Extras</div>
 
                         <div class="card-body">
-                            @foreach($extras as $extra)
+                            @foreach($extras as $key => $extra)
                                 <div class="form-group">
-                                    <input class="input-group-sm" type="{{ $extra->input_type }}" id="{{ $extra->slug }}" name="extra_check[]" value="{{ $extra->id }}" placeholder="{{ $extra->name }}">
+                                    <input class="input-group-sm"
+                                           type="{{ $extra->input_type }}"
+                                           id="{{ $extra->slug }}"
+                                           name="extra_check[]"
+                                           value="{{ $extra->id }}"
+                                           placeholder="{{ $extra->name }}"
+                                           @if(is_array(old('extra_check')) && in_array($extra->id, old('extra_check'))) checked @endif>
                                     <label for="{{ $extra->slug }}">{{ $extra->name }}</label>
                                 </div>
                             @endforeach
@@ -303,9 +309,15 @@
                         <div class="card-header">Room Requirements</div>
 
                         <div class="card-body">
-                            @foreach($requirements as $requirement)
+                            @foreach($requirements as $key => $requirement)
                                 <div class="form-group">
-                                    <input class="input-group-sm" type="{{ $requirement->input_type }}" id="{{ $requirement->slug }}" name="requirement_check[]" value="{{ $requirement->id }}" placeholder="{{ $requirement->name }}">
+                                    <input class="input-group-sm"
+                                           type="{{ $requirement->input_type }}"
+                                           id="{{ $requirement->slug }}"
+                                           name="requirement_check[]"
+                                           value="{{ $requirement->id }}"
+                                           placeholder="{{ $requirement->name }}"
+                                           @if(is_array(old('requirement_check')) && in_array($requirement->id, old('requirement_check'))) checked @endif>
                                     <label for="{{ $requirement->slug }}">{{ $requirement->name }}</label>
                                 </div>
                             @endforeach
@@ -320,6 +332,7 @@
 @endsection
 
 @section('scripts')
+    <!-- include summernote css/js -->
     <script type="text/javascript">
         $(document).ready(function() {
             $('#available-from').datepicker({ dateFormat: 'dd-mm-yy' });
