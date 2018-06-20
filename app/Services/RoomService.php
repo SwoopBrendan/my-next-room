@@ -1,8 +1,12 @@
 <?php  namespace App\Services;
 
+use App\Helpers\DataHelper;
+use App\Image;
 use App\Room;
 use App\RoomExtra;
+use App\RoomImage;
 use App\RoomRequirement;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,8 +40,8 @@ class RoomService extends Service
         $room->rent             = $request->get('rent');
         $room->lease_term_min   = $request->get('lease-min');
         $room->lease_term_max   = $request->get('lease-max');
-        $room->available_from   = $request->get('available-from');
-        $room->available_to     = $request->get('available-to');
+        $room->available_from   = Carbon::parse($request->get('available-from'));
+        $room->available_to     = Carbon::parse($request->get('available-to'));
         $room->room_count       = $request->get('rooms');
         $room->bathroom_count   = $request->get('bathrooms');
         $room->user_id          = Auth::user()->id;
@@ -55,6 +59,30 @@ class RoomService extends Service
             foreach ($request->get('requirement_check') as $requirement) {
                 $this->saveRequirement($room->id, $requirement);
             }
+        }
+
+        if ($request->hasFile('picture_1')) {
+            $this->saveRoomImage($request, $room->id, 'picture_1');
+        }
+
+        if ($request->hasFile('picture_2')) {
+            $this->saveRoomImage($request, $room->id, 'picture_2');
+        }
+
+        if ($request->hasFile('picture_3')) {
+            $this->saveRoomImage($request, $room->id, 'picture_3');
+        }
+
+        if ($request->hasFile('picture_4')) {
+            $this->saveRoomImage($request, $room->id, 'picture_4');
+        }
+
+        if ($request->hasFile('picture_5')) {
+            $this->saveRoomImage($request, $room->id, 'picture_5');
+        }
+
+        if ($request->hasFile('picture_6')) {
+            $this->saveRoomImage($request, $room->id, 'picture_6');
         }
     }
 
@@ -88,5 +116,29 @@ class RoomService extends Service
         $roomRequirement->requirement_id = $requirementId;
 
         $roomRequirement->save();
+    }
+
+    public function saveRoomImage(Request $request, $roomId, $pictureName)
+    {
+        $file = $request->file($pictureName);
+        $extension = $file->getClientOriginalExtension();
+        $fileName = DataHelper::createUid() . '.' . $extension;
+        $uploadDir = 'images/room/';
+        $filePath = $uploadDir . $fileName;
+        $file->move($uploadDir, $fileName);
+
+        $image = new Image();
+        $image->name = $fileName;
+        $image->slug = $fileName;
+        $image->type = $extension;
+        $image->path = $filePath;
+        $image->full_path = $filePath;
+        $image->original_name = $file->getClientOriginalName();
+        $image->save();
+
+        $roomImage = new RoomImage();
+        $roomImage->room_id = $roomId;
+        $roomImage->image_id = $image->id;
+        $roomImage->save();
     }
 }
