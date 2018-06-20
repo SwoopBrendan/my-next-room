@@ -3,6 +3,19 @@
         <h3>Room Filter</h3>
     </div>
     <form>
+        <div class="form-group">
+            <select class="form-control" name="greater_areas" id="greater_areas">
+                <option value="" selected disabled>Select Greater Area</option>
+                @foreach($greaterAreas as $value => $area)
+                    <option value="{{ $area->id }}">{{ $area->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control" name="locations" id="locations" disabled>
+                <option value="" selected disabled>Select Suburb</option>
+            </select>
+        </div>
         {{-- Location Filters --}}
         <div class="form-group">
             <select class="form-control" id="room-select" name="room-select">
@@ -30,13 +43,13 @@
 
         {{-- Room Detail Filters --}}
         <div class="form-group">
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="(R) min rent">
+            <input type="text" class="form-control" placeholder="(R) min rent">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="(R) max rent">
+            <input type="text" class="form-control" placeholder="(R) max rent">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Available From">
+            <input type="text" class="form-control" placeholder="Available From">
         </div>
         {{-- Room Detail Filters End --}}
 

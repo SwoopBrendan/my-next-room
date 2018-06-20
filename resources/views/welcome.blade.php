@@ -18,32 +18,12 @@
     <div class="container-fluid">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <a href="{{ url('/home') }}" class="btn btn-primary w-50 mt-3">Find My Next Room</a>
+                <div class="col-md-6 text-center">
+                    <a href="{{ url('/home') }}" class="btn btn-success w-75 mt-3">Find My Next Room</a>
                 </div>
-            </div>
-            <div class="row mt-4 justify-content-center">
-
-                <div class="col-md-6">
-                    <div class="card text-center">
-                        <div class="card-header">Looking?</div>
-
-                        <div class="card-body">
-                            Are you posting or looking?
-                        </div>
-                    </div>
+                <div class="col-md-6 text-center">
+                    <a href="{{ url('/room/create') }}" class="btn btn-primary w-75 mt-3">Advertise A Room</a>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="card text-center">
-                        <div class="card-header">Advertising?</div>
-
-                        <div class="card-body">
-                            Are you posting or looking?
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
