@@ -141,4 +141,15 @@ class RoomService extends Service
         $roomImage->image_id = $image->id;
         $roomImage->save();
     }
+
+    /**
+     * Get rooms by user
+     *
+     * @param $userId
+     * @return mixed
+     */
+    public function getRoomsByUser($userId)
+    {
+        return Room::where('user_id', $userId)->get();
+    }
 }

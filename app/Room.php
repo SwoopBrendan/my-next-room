@@ -24,4 +24,34 @@ class Room extends Model
     protected $hidden = [
 
     ];
+
+    /**
+     * get room extras
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function roomExtras()
+    {
+        return $this->hasMany('App\RoomExtra', 'room_id', 'id');
+    }
+
+    /**
+     * get requirements
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function roomRequirements()
+    {
+        return $this->hasMany('App\RoomRequirement');
+    }
+
+    /**
+     * get room images
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function roomImages()
+    {
+        return $this->hasMany('App\RoomImage');
+    }
 }
