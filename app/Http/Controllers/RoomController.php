@@ -24,7 +24,12 @@ class RoomController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.room.index')->with([
+            'extras'        => $this->service->getExtras(),
+            'requirements'  => $this->service->getRequirements(),
+            'greaterAreas'  => $this->service->getGreaterAreas(),
+            'rooms'         => $this->service->getRooms()
+        ]);
     }
 
     /**

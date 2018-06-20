@@ -21,8 +21,6 @@ Auth::routes();
 Route::group(
     ['middleware' => ['auth']], function () {
 
-    Route::get('/home', 'HomeController@index')->name('home');
-
     Route::resource('room', 'RoomController');
     Route::post('room/getLocations/{id}', 'RoomController@getLocations');
     Route::post('getLocations/{id}', 'RoomController@getLocations');

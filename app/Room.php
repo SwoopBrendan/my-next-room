@@ -52,6 +52,16 @@ class Room extends Model
      */
     public function roomImages()
     {
-        return $this->hasMany('App\RoomImage');
+        return $this->hasMany('App\RoomImage', 'room_id', 'id');
+    }
+
+    /**
+     * get room location
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function roomLocation()
+    {
+        return $this->hasOne('App\Location', 'id', 'location_id');
     }
 }

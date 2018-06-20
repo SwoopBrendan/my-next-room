@@ -21,6 +21,11 @@ class RoomService extends Service
 
     }
 
+    public function getRooms($filter = null)
+    {
+        return Room::all();
+    }
+
     /**
      * Save A Room
      *
@@ -118,6 +123,13 @@ class RoomService extends Service
         $roomRequirement->save();
     }
 
+    /**
+     * Save room image
+     *
+     * @param Request $request
+     * @param $roomId
+     * @param $pictureName
+     */
     public function saveRoomImage(Request $request, $roomId, $pictureName)
     {
         $file = $request->file($pictureName);
