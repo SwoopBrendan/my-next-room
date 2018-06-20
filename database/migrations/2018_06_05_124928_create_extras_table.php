@@ -18,6 +18,7 @@ class CreateExtrasTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('description')->nullable();
+            $table->string('input_type');
             $table->timestamps();
         });
     }

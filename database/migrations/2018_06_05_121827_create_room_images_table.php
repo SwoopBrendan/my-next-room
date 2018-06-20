@@ -16,6 +16,7 @@ class CreateRoomImagesTable extends Migration
         Schema::create('room_images', function (Blueprint $table) {
             $table->integer('room_id')->unsigned();
             $table->integer('image_id')->unsigned();
+            $table->timestamps();
         });
     }
 
