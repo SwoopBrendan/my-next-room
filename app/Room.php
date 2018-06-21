@@ -26,6 +26,40 @@ class Room extends Model
     ];
 
     /**
+     * Location Filter
+     *
+     * @param $query
+     * @param $location_id
+     * @return mixed
+     */
+    public function scopeLocation($query, $location_id)
+    {
+        if (!is_null($location_id)) {
+            return $query->where('location_id', '=', $location_id);
+        }
+
+        return $query;
+    }
+
+    public function scopeRentRange($query, $minRent, $maxRent)
+    {
+        if (!is_null($minRent)) {
+            return $query->whereBetween('rent', [$minRent, $maxRent]);
+        }
+
+        return $query;
+    }
+
+    public function scopeAvailableFrom($query, $availableFrom)
+    {
+        if (!is_null($availableFrom)) {
+            return $query->whereDate('available_from', '>=', $availableFrom);
+        }
+
+        return $query;
+    }
+
+    /**
      * get room extras
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

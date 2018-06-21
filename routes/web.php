@@ -21,6 +21,7 @@ Auth::routes();
 Route::group(
     ['middleware' => ['auth']], function () {
 
+    Route::get('room/search', 'RoomController@searchRooms');
     Route::resource('room', 'RoomController');
     Route::post('room/getLocations/{id}', 'RoomController@getLocations');
     Route::post('getLocations/{id}', 'RoomController@getLocations');

@@ -34,5 +34,11 @@
 @endsection
 
 @section('scripts')
-
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#available_from').datepicker({
+                dateFormat: 'dd-mm-yy'
+            });
+        });
+    </script>
 @endsection

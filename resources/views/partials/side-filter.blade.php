@@ -2,92 +2,52 @@
     <div class="filter-header text-center">
         <h3>Room Filter</h3>
     </div>
-    <form>
+    <form action="room" method="GET">
+        {{ csrf_field() }}
+
         <div class="form-group">
             <select class="form-control" name="greater_areas" id="greater_areas">
                 <option value="" selected disabled>Select Greater Area</option>
                 @foreach($greaterAreas as $value => $area)
-                    <option value="{{ $area->id }}">{{ $area->name }}</option>
+                    <option {{ old('greater_areas') == $area->id ? 'selected' : '' }} value="{{ $area->id }}">{{ $area->name }}</option>
                 @endforeach
             </select>
         </div>
         <div class="form-group">
-            <select class="form-control" name="locations" id="locations" disabled>
+            <select class="form-control" name="locations" id="locations">
                 <option value="" selected disabled>Select Suburb</option>
+                @foreach($locations as $value => $location)
+                    <option {{ old('locations') == $location->id ? 'selected' : '' }} value="{{ $location->id }}">{{ $location->name }}</option>
+                @endforeach
             </select>
+            @if ($errors->has('locations'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('locations') }}</strong>
+                </span>
+            @endif
         </div>
-        {{-- Location Filters --}}
-        <div class="form-group">
-            <select class="form-control" id="room-select" name="room-select">
-                <option value="0">No. of Bedrooms</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <select class="form-control" id="bathroom-select" name="bathroom-select">
-                <option value="0">No. of Bathrooms</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-        </div>
-        {{-- Location Filters End --}}
 
         {{-- Room Detail Filters --}}
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="(R) min rent">
+            <input type="text" class="form-control" name="min_rent" id="min_rent" placeholder="(R) min rent" value="{{ old('min_rent') }}">
+            @if ($errors->has('min_rent'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('min_rent') }}</strong>
+                </span>
+            @endif
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="(R) max rent">
+            <input type="text" class="form-control" name="max_rent" id="max_rent" placeholder="(R) max rent" value="{{ old('max_rent') }}">
+            @if ($errors->has('max_rent'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('max_rent') }}</strong>
+                </span>
+            @endif
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Available From">
+            <input type="text" class="form-control" name="available_from" id="available_from" placeholder="Available From" value="{{ old('available_from') }}">
         </div>
         {{-- Room Detail Filters End --}}
-
-        {{-- Room Extras Filters --}}
-        <p>
-            <a class="btn btn-success dropdown-toggle w-100" data-toggle="collapse" href="#collapseExtraFilters" role="button" aria-expanded="false" aria-controls="collapseExtraFilters">
-                Extras / Includes
-            </a>
-        </p>
-        <div class="collapse" id="collapseExtraFilters">
-            <div class="card card-body">
-                @foreach($extras as $extra)
-                    <div class="form-group">
-                        <input type="{{ $extra->input_type }}" id="{{ $extra->slug }}" name="{{ $extra->slug }}" placeholder="{{ $extra->name }}">
-                        <label for="{{ $extra->slug }}">{{ $extra->name }}</label>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        {{-- Room Extras Filters End --}}
-
-        {{-- Room Requirements Filters --}}
-        <p>
-            <a class="btn btn-warning dropdown-toggle w-100" data-toggle="collapse" href="#collapseRequirementFilters" role="button" aria-expanded="false" aria-controls="collapseRequirementFilters">
-                Requirements
-            </a>
-        </p>
-        <div class="collapse" id="collapseRequirementFilters">
-            <div class="card card-body">
-                @foreach($requirements as $requirement)
-                    <div class="form-group">
-                        <input type="{{ $requirement->input_type }}" id="{{ $requirement->slug }}" name="{{ $requirement->slug }}" placeholder="{{ $requirement->name }}">
-                        <label for="{{ $requirement->slug }}">{{ $requirement->name }}</label>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        {{-- Room Requirements Filters End --}}
 
         {{-- Form Actions --}}
         <button type="submit" class="btn btn-primary w-100">Update Search</button>

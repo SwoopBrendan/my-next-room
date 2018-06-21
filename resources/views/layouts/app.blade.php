@@ -62,9 +62,7 @@
             $('#greater_areas').change(function () {
 
                 let locations = $('#locations');
-
-                locations.prop("disabled", true);
-
+                
                 $.ajax({
                     url: 'getLocations/'+this.value,
                     type: 'POST',
@@ -81,7 +79,6 @@
                         }
 
                         locations.html(listItems);
-
                     }
                 });
 

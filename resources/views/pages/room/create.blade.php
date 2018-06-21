@@ -46,8 +46,8 @@
                                             </select>
                                             @if ($errors->has('locations'))
                                                 <span class="help-block">
-                                                <strong>{{ $errors->first('locations') }}</strong>
-                                            </span>
+                                                    <strong>{{ $errors->first('locations') }}</strong>
+                                                </span>
                                             @endif
                                         </div>
                                     </div>
@@ -337,7 +337,6 @@
 @endsection
 
 @section('scripts')
-    <!-- include summernote css/js -->
     <script type="text/javascript">
         $(document).ready(function() {
             $('#available-from').datepicker({ dateFormat: 'dd-mm-yy' });

@@ -2,6 +2,7 @@
 
 use App\Helpers\ExceptionHelper;
 use App\Http\Requests\RoomRequest;
+use App\Http\Requests\RoomSearchRequest;
 use App\Services\RoomService;
 use Illuminate\Http\Request;
 use Throwable;
@@ -18,17 +19,21 @@ class RoomController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display room listings
      *
-     * @return \Illuminate\Http\Response
+     * @param RoomSearchRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(RoomSearchRequest $request)
     {
+        $request->flash();
+
         return view('pages.room.index')->with([
             'extras'        => $this->service->getExtras(),
             'requirements'  => $this->service->getRequirements(),
             'greaterAreas'  => $this->service->getGreaterAreas(),
-            'rooms'         => $this->service->getRooms()
+            'locations'     => $this->service->getLocations(),
+            'rooms'         => $this->service->getRooms($request)
         ]);
     }
 

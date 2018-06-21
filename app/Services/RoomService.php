@@ -9,6 +9,7 @@ use App\RoomRequirement;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class RoomService
@@ -21,14 +22,29 @@ class RoomService extends Service
 
     }
 
+    /**
+     * Get room by ID
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getRoom($id)
     {
         return Room::find($id);
     }
 
-    public function getRooms($filter = null)
+    /**
+     * Get Rooms by filter
+     *
+     * @param Request $request
+     * @return Room[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getRooms(Request $request)
     {
-        return Room::all();
+        return Room::location($request->get('locations'))
+            ->rentRange($request->get('min_rent'), $request->get('max_rent'))
+            ->availableFrom(Carbon::parse(date('d-m-Y', strtotime($request->get('available_from') . ' - 1 day'))))
+            ->paginate(12);
     }
 
     /**
