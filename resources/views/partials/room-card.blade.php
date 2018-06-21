@@ -1,7 +1,6 @@
 <div class="col-md-3">
     <div class="card room-card text-center">
-        <a href="room/{{ $room->id }}/edit">
-
+        <a href="room/{{ $room->id }}">
             <div id="carouselControls{{ $room->id }}" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     @php $first = 1; @endphp

@@ -52,7 +52,6 @@
         ],
         "post-install-cmd": [
             "php artisan down",
-            "php artisan migrate:fresh --seed",
             "npm run dev",
             "composer dumpautoload",
             "php artisan up"

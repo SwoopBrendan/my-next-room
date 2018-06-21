@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/slick.css') }}" rel="stylesheet">
     <link href="{{ asset('components/summernote/dist/summernote-bs4.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />
 
@@ -27,7 +28,7 @@
 
         @include('partials.top-nav')
 
-        <div class="container-fluid session-notification">
+        <div class="container-fluid">
             @if (Session::has('error'))
                 @include('partials.alert-error')
             @endif
@@ -52,6 +53,7 @@
     <script src="{{ asset('components/jquery/jquery.js') }}"></script>
     <script src="{{ asset('components/jqueryui/jquery-ui.js') }}"></script>
     <script src="{{ asset('components/summernote/dist/summernote-bs4.min.js') }}"></script>
+    <script src="{{ asset('components/slick/dist/slick.js') }}"></script>
 
     <script>
         $(document).ready(function() {

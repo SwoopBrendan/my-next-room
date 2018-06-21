@@ -21,6 +21,11 @@ class RoomService extends Service
 
     }
 
+    public function getRoom($id)
+    {
+        return Room::find($id);
+    }
+
     public function getRooms($filter = null)
     {
         return Room::all();

@@ -79,7 +79,9 @@ class RoomController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('pages.room.view')->with([
+            'room' => $this->service->getRoom($id)
+        ]);
     }
 
     /**

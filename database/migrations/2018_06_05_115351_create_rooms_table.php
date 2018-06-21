@@ -17,7 +17,7 @@ class CreateRoomsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
-            $table->string('description')->nullable();
+            $table->string('description', 2500)->nullable();
             $table->integer('length')->nullable()->unsigned();
             $table->integer('width')->nullable()->unsigned();
             $table->string('deposit');
