@@ -3,7 +3,7 @@
 @section('styles')
     <style>
         .card-img-top{
-            max-height: 200px;
+            height: 200px;
         }
     </style>
 @endsection

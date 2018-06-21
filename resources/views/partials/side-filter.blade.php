@@ -7,7 +7,7 @@
 
         <div class="form-group">
             <select class="form-control" name="greater_areas" id="greater_areas">
-                <option value="" selected disabled>Select Greater Area</option>
+                <option value="" selected>All Areas</option>
                 @foreach($greaterAreas as $value => $area)
                     <option {{ old('greater_areas') == $area->id ? 'selected' : '' }} value="{{ $area->id }}">{{ $area->name }}</option>
                 @endforeach
@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <select class="form-control" name="locations" id="locations">
-                <option value="" selected disabled>Select Suburb</option>
+                <option value="" selected>All Suburbs</option>
                 @foreach($locations as $value => $location)
                     <option {{ old('locations') == $location->id ? 'selected' : '' }} value="{{ $location->id }}">{{ $location->name }}</option>
                 @endforeach

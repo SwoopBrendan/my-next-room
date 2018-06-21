@@ -41,7 +41,8 @@ class RoomService extends Service
      */
     public function getRooms(Request $request)
     {
-        return Room::location($request->get('locations'))
+        return Room::greaterArea($request->get('greater_areas'))
+            ->location($request->get('locations'))
             ->rentRange($request->get('min_rent'), $request->get('max_rent'))
             ->availableFrom(Carbon::parse(date('d-m-Y', strtotime($request->get('available_from') . ' - 1 day'))))
             ->paginate(12);
@@ -71,6 +72,7 @@ class RoomService extends Service
         $room->room_count       = $request->get('rooms');
         $room->bathroom_count   = $request->get('bathrooms');
         $room->user_id          = Auth::user()->id;
+        $room->greater_area_id  = $request->get('greater_areas');
         $room->location_id      = $request->get('locations');
 
         $room->save();

@@ -14,6 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('css/slick.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/slick-theme.css') }}" rel="stylesheet">
     <link href="{{ asset('components/summernote/dist/summernote-bs4.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />
 
@@ -62,7 +63,7 @@
             $('#greater_areas').change(function () {
 
                 let locations = $('#locations');
-                
+
                 $.ajax({
                     url: 'getLocations/'+this.value,
                     type: 'POST',
@@ -74,6 +75,7 @@
                         let response_array = JSON.parse(json_response);
                         let listItems = '';
 
+                        listItems += "<option value=''>All Suburbs</option>";
                         for (var i = 0; i < response_array.length; i++) {
                             listItems += "<option value='" + response_array[i].id + "'>" + response_array[i].name + "</option>";
                         }

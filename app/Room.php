@@ -25,6 +25,15 @@ class Room extends Model
 
     ];
 
+    public function scopeGreaterArea($query, $greaterAreaId)
+    {
+        if (!is_null($greaterAreaId)) {
+            return $query->where('greater_area_id', '=', $greaterAreaId);
+        }
+
+        return $query;
+    }
+
     /**
      * Location Filter
      *
@@ -32,10 +41,10 @@ class Room extends Model
      * @param $location_id
      * @return mixed
      */
-    public function scopeLocation($query, $location_id)
+    public function scopeLocation($query, $locationId)
     {
-        if (!is_null($location_id)) {
-            return $query->where('location_id', '=', $location_id);
+        if (!is_null($locationId)) {
+            return $query->where('location_id', '=', $locationId);
         }
 
         return $query;

@@ -2,7 +2,9 @@
 
 @section('styles')
     <style>
-
+        .slick-prev:before, .slick-next:before {
+            color: black;
+        }
     </style>
 @endsection
 
@@ -10,20 +12,19 @@
     <div class="container-fluid">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="slick-large mt-4">
                         @foreach($room->roomImages as $roomImage)
                             <div>
-                                <img src="{{ asset('images/room/' . $roomImage->image->name) }}" alt="Card image cap" style="height: 610px; width: 100%;">
+                                <img class="img-fluid rounded" src="{{ asset('images/room/' . $roomImage->image->name) }}" alt="Card image cap" style="height: 610px; width: 100%;">
                             </div>
                         @endforeach
                     </div>
-                </div>
-                <div class="col-md-4">
+
                     <div class="slick-images mt-4">
                         @foreach($room->roomImages as $roomImage)
                             <div>
-                                <img src="{{ asset('images/room/' . $roomImage->image->name) }}" alt="Card image cap" style="height: 300px; width: 100%;">
+                                <img class="img-fluid rounded" src="{{ asset('images/room/' . $roomImage->image->name) }}" alt="Card image cap" style="height: 300px; width: 95%; margin-left: auto; margin-right: auto;">
                             </div>
                         @endforeach
                     </div>
@@ -153,7 +154,6 @@
                 dots: false,
                 prevArrow: false,
                 nextArrow: false,
-                vertical: true,
                 asNaveFor: '.slick-images'
             });
             $('.slick-images').slick({
@@ -161,10 +161,6 @@
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 2000,
-                dots: false,
-                prevArrow: false,
-                nextArrow: false,
-                vertical: true,
                 asNavFor: '.slick-large'
             });
         });
