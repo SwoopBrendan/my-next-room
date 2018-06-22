@@ -36,4 +36,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Room');
     }
+
+    /**
+     * get user favourites
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function favourites()
+    {
+        return $this->hasMany('App\UserFavourite');
+    }
 }
