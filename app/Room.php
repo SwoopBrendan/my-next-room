@@ -38,7 +38,7 @@ class Room extends Model
      * Location Filter
      *
      * @param $query
-     * @param $location_id
+     * @param $locationId
      * @return mixed
      */
     public function scopeLocation($query, $locationId)
@@ -52,11 +52,10 @@ class Room extends Model
 
     public function scopeRentRange($query, $minRent, $maxRent)
     {
-        if (!is_null($minRent)) {
-            return $query->whereBetween('rent', [$minRent, $maxRent]);
-        }
+        $minRent = isset($mixRent) ? $minRent : 0;
+        $maxRent = isset($maxRent) ? $maxRent : 1000000;
 
-        return $query;
+        return $query->whereBetween('rent', [$minRent, $maxRent]);
     }
 
     public function scopeAvailableFrom($query, $availableFrom)

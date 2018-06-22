@@ -12,7 +12,7 @@
     <div class="container-fluid">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <div class="slick-large mt-4">
                         @foreach($room->roomImages as $roomImage)
                             <div>
@@ -20,7 +20,8 @@
                             </div>
                         @endforeach
                     </div>
-
+                </div>
+                <div class="col-md-4">
                     <div class="slick-images mt-4">
                         @foreach($room->roomImages as $roomImage)
                             <div>
@@ -161,7 +162,8 @@
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 2000,
-                asNavFor: '.slick-large'
+                asNavFor: '.slick-large',
+                vertical: true
             });
         });
     </script>

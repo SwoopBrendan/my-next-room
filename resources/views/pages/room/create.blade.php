@@ -12,13 +12,11 @@
 @section('content')
     <div class="container-fluid">
 
-        <div class="container">
-
             <form action="/room" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-6">
                         <div class="card mt-4">
                             <div class="card-header">Room Details</div>
 
@@ -307,7 +305,8 @@
                                 @endforeach
                             </div>
                         </div>
-
+                    </div>
+                    <div class="col-md-3">
                         <div class="card mt-4">
                             <div class="card-header">Room Requirements</div>
 
@@ -330,8 +329,6 @@
                 </div>
 
             </form>
-
-        </div>
 
     </div>
 @endsection
