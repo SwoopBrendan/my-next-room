@@ -25,7 +25,7 @@
                     <a class="nav-link" href="{{ url('/user') }}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/user/inbox') }}">Inbox (5)</a>
+                    <a class="nav-link" href="{{ url('/messages') }}">Inbox @include('messenger.unread-count')</a>
                 </li>
             @endguest
         </ul>
