@@ -13,7 +13,7 @@ class Room extends Model
      */
     protected $fillable = [
         'id', 'name', 'slug', 'description', 'length', 'width', 'deposit', 'rent', 'lease_term_min', 'lease_term_max',
-        'available_from', 'available_to', 'room_count', 'bathroom_count', 'user_id', 'location_id'
+        'available_from', 'available_to', 'room_count', 'bathroom_count', 'user_id', 'location_id', 'room_id'
     ];
 
     /**
