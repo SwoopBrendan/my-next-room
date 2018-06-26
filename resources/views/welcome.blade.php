@@ -19,7 +19,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center">
-                    <a href="{{ url('/home') }}" class="btn btn-success w-75 mt-3">Find My Next Room</a>
+                    <a href="{{ url('/room') }}" class="btn btn-success w-75 mt-3">Find My Next Room</a>
                 </div>
                 <div class="col-md-6 text-center">
                     <a href="{{ url('/room/create') }}" class="btn btn-primary w-75 mt-3">Advertise A Room</a>
