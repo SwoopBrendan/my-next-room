@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddMessagesRoomForeignKeyToMessagesTable extends Migration
+class AddRoomIdColumnToThreadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddMessagesRoomForeignKeyToMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::table('messages', function(Blueprint $table) {
-            $table->foreign('room_id', 'messages_rooms_fk')->references('id')->on('rooms')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+        Schema::table('threads', function(Blueprint $table) {
+            $table->integer('room_id')->unsigned();
         });
     }
 
@@ -25,8 +25,8 @@ class AddMessagesRoomForeignKeyToMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::table('messages', function(Blueprint $table) {
-            $table->dropForeign('messages_rooms_fk');
+        Schema::table('threads', function(Blueprint $table) {
+            $table->dropColumn('room_id');
         });
     }
 }

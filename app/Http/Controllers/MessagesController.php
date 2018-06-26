@@ -25,14 +25,12 @@ class MessagesController extends Controller
      */
     public function index()
     {
-        // All threads, ignore deleted/archived participants
-//        $threads = Thread::getAllLatest()->get();
         // All threads that user is participating in
-         $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
-        // All threads that user is participating in, with new messages
-//         $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
+        $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
+
         return view('messenger.index', compact('threads'));
     }
+
     /**
      * Shows a message thread.
      *
@@ -47,14 +45,13 @@ class MessagesController extends Controller
             Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
             return redirect()->route('messages');
         }
-        // show current user in list if not a current participant
-        // $users = User::whereNotIn('id', $thread->participantsUserIds())->get();
-        // don't show the current user in list
+
         $userId = Auth::id();
-        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
         $thread->markAsRead($userId);
+
         return view('messenger.show', compact('thread', 'users'));
     }
+
     /**
      * Creates a new message thread.
      *
@@ -64,6 +61,7 @@ class MessagesController extends Controller
     {
         return view('messenger.create');
     }
+
     /**
      * Stores a new message thread.
      *
@@ -72,27 +70,34 @@ class MessagesController extends Controller
     public function store()
     {
         $input = Input::all();
+
         $thread = Thread::create([
             'subject' => $input['subject'],
+            'room_id' => $input['room_id']
         ]);
+
         // Message
         Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
             'body' => $input['message'],
         ]);
+
         // Sender
         Participant::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
             'last_read' => new Carbon,
         ]);
+
         // Recipients
         if (Input::has('recipient')) {
             $thread->addParticipant($input['recipient']);
         }
+
         return redirect()->route('messages');
     }
+
     /**
      * Adds a new message to a current thread.
      *

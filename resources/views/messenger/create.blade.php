@@ -11,6 +11,7 @@
     </div>
 
     <input type="hidden" name="recipient" id="recipient" value="{{ $room->user_id }}">
+    <input type="hidden" name="room_id" id="room_id" value="{{ $room->id }}">
 
     <!-- Submit Form Input -->
     <div class="form-group">
