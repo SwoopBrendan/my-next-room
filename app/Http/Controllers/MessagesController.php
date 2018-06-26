@@ -1,8 +1,5 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
-
-use App\User;
 use Carbon\Carbon;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
@@ -49,7 +46,7 @@ class MessagesController extends Controller
         $userId = Auth::id();
         $thread->markAsRead($userId);
 
-        return view('messenger.show', compact('thread', 'users'));
+        return view('messenger.show', compact('thread', 'userId'));
     }
 
     /**
@@ -79,14 +76,14 @@ class MessagesController extends Controller
         // Message
         Message::create([
             'thread_id' => $thread->id,
-            'user_id' => Auth::id(),
-            'body' => $input['message'],
+            'user_id'   => Auth::id(),
+            'body'      => $input['message'],
         ]);
 
         // Sender
         Participant::create([
             'thread_id' => $thread->id,
-            'user_id' => Auth::id(),
+            'user_id'   => Auth::id(),
             'last_read' => new Carbon,
         ]);
 
@@ -112,24 +109,25 @@ class MessagesController extends Controller
             Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
             return redirect()->route('messages');
         }
+
         $thread->activateAllParticipants();
+
         // Message
         Message::create([
             'thread_id' => $thread->id,
-            'user_id' => Auth::id(),
-            'body' => Input::get('message'),
+            'user_id'   => Auth::id(),
+            'body'      => Input::get('message'),
         ]);
+
         // Add replier as a participant
         $participant = Participant::firstOrCreate([
             'thread_id' => $thread->id,
-            'user_id' => Auth::id(),
+            'user_id'   => Auth::id(),
         ]);
+
         $participant->last_read = new Carbon;
         $participant->save();
-        // Recipients
-        if (Input::has('recipients')) {
-            $thread->addParticipant(Input::get('recipients'));
-        }
+
         return redirect()->route('messages.show', $id);
     }
 }
