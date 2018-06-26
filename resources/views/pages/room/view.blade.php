@@ -112,6 +112,15 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            Message Leaser
+                        </div>
+                        <div class="card-body">
+                            @include('messenger.create')
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-4">

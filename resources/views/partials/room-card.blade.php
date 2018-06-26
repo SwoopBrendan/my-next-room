@@ -1,41 +1,21 @@
-<div class="col-md-3">
-    <div class="card room-card text-center">
-        <a href="room/{{ $room->id }}">
-            <div id="carouselControls{{ $room->id }}" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    @php $first = 1; @endphp
-                        @foreach($room->roomImages as $roomImage)
-                            <div class="carousel-item @if($first == 1){{ 'active' }}@endif">
-                                <img class="card-img-top" src="{{ asset('images/room/' . $roomImage->image->name) }}" alt="Card image cap">
-                            </div>
-                            @php $first++; @endphp
-                        @endforeach
-                    @php $first = 1; @endphp
-                </div>
-                <a class="carousel-control-prev" href="#carouselControls{{ $room->id }}" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselControls{{ $room->id }}" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-
-            <div class="card-header">{{ $room->name }}</div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        Rent: R {{ $room->rent }}
-                    </div>
-                    <div class="col-md-6">
-                        Deposit: R {{ $room->deposit }}
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                {{ $room->roomLocation->locationGreaterArea->name }}, {{ $room->roomLocation->name }}
-            </div>
-        </a>
+<div class="col-md-4">
+    <div class="d-flex flex-row border rounded">
+        <div class="p-0 w-25">
+            @php $roomImages = $room->roomImages @endphp
+            <img src="{{ asset('images/room/' . $roomImages[0]->image->name) }}" class="img-thumbnail border-0" />
+        </div>
+        <div class="pl-3 pt-2 pr-2 pb-2 w-75 border-left">
+            <h4 class="text-primary">{{ $room->name }}</h4>
+            <h5 class="text-info">{{ $room->roomLocation->locationGreaterArea->name }}</h5>
+            <h5 class="text-info">{{ $room->roomLocation->name }}</h5>
+            <ul class="m-0 float-left" style="list-style: none; margin:0; padding: 0">
+                <li>Rent: R {{ $room->rent }}</li>
+                <li>Deposit: R {{ $room->deposit }}</li>
+            </ul>
+            <p class="text-right m-0">
+                <a href="{{ url('room/' . $room->id) }}" class="btn btn-success"><i class="far fa-eye"></i></a>
+                <a href="#" class="btn btn-primary"><i class="far fa-star"></i></a>
+            </p>
+        </div>
     </div>
 </div>

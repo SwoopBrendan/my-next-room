@@ -22,9 +22,7 @@
                         @endforeach
                     @else
                         <div class="col-md-12 text-center mt-4">
-                            <h3>
-                                No Rooms that match your search
-                            </h3>
+                            <h3>No Rooms that match your search</h3>
                         </div>
                     @endif
                 </div>
