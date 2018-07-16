@@ -12,7 +12,10 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+   .sass('resources/assets/sass/app.scss', 'public/css')
+   .sass('node_modules/slick-carousel/slick/slick.scss', 'public/css')
+   .sass('node_modules/slick-carousel/slick/slick-theme.scss', 'public/css');
 
 mix.copy('vendor/components/jquery/jquery.js', 'public/components/jquery');
 mix.copy('vendor/components/jqueryui/jquery-ui.js', 'public/components/jqueryui');
+mix.copy('node_modules/slick-carousel/slick/slick.js', 'public/components/slick/dist/slick.js');

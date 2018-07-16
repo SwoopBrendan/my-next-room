@@ -13,8 +13,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/slick.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/slick-theme.css') }}" rel="stylesheet">
     <link href="{{ asset('components/summernote/dist/summernote-bs4.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
     @yield('styles')
 
@@ -27,7 +30,7 @@
 
         @include('partials.top-nav')
 
-        <div class="container-fluid session-notification">
+        <div class="container-fluid">
             @if (Session::has('error'))
                 @include('partials.alert-error')
             @endif
@@ -52,6 +55,7 @@
     <script src="{{ asset('components/jquery/jquery.js') }}"></script>
     <script src="{{ asset('components/jqueryui/jquery-ui.js') }}"></script>
     <script src="{{ asset('components/summernote/dist/summernote-bs4.min.js') }}"></script>
+    <script src="{{ asset('components/slick/dist/slick.js') }}"></script>
 
     <script>
         $(document).ready(function() {
@@ -60,8 +64,6 @@
             $('#greater_areas').change(function () {
 
                 let locations = $('#locations');
-
-                locations.prop("disabled", true);
 
                 $.ajax({
                     url: 'getLocations/'+this.value,
@@ -74,12 +76,12 @@
                         let response_array = JSON.parse(json_response);
                         let listItems = '';
 
+                        listItems += "<option value=''>All Suburbs</option>";
                         for (var i = 0; i < response_array.length; i++) {
                             listItems += "<option value='" + response_array[i].id + "'>" + response_array[i].name + "</option>";
                         }
 
                         locations.html(listItems);
-
                     }
                 });
 

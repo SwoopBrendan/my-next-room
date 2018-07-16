@@ -13,16 +13,19 @@
 
             @else
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/home') }}">Home</a>
+                    <a class="nav-link" href="{{ url('/') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/room') }}">Find A Room</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/room/create') }}">Advertise A Room</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/user') }}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/room/create') }}">Advertise</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/user/inbox') }}">Inbox (5)</a>
+                    <a class="nav-link" href="{{ url('/messages') }}">Inbox @include('messenger.unread-count')</a>
                 </li>
             @endguest
         </ul>
