@@ -1,8 +1,7 @@
-<?php
-
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 use App\Services\HomeService;
+use App\Services\RoomService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,10 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home')->with([
-            'extras'        => $this->service->getExtras(),
-            'requirements'  => $this->service->getRequirements(),
-            'greaterAreas'  => $this->service->getGreaterAreas()
-        ]);
+        //
     }
 }

@@ -9,6 +9,7 @@ use App\RoomRequirement;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class RoomService
@@ -19,6 +20,32 @@ class RoomService extends Service
     public function __construct()
     {
 
+    }
+
+    /**
+     * Get room by ID
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getRoom($id)
+    {
+        return Room::find($id);
+    }
+
+    /**
+     * Get Rooms by filter
+     *
+     * @param Request $request
+     * @return Room[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getRooms(Request $request)
+    {
+        return Room::greaterArea($request->get('greater_areas'))
+            ->location($request->get('locations'))
+            ->rentRange($request->get('min_rent'), $request->get('max_rent'))
+            ->availableFrom(Carbon::parse(date('d-m-Y', strtotime($request->get('available_from') . ' - 1 day'))))
+            ->paginate(12);
     }
 
     /**
@@ -45,6 +72,7 @@ class RoomService extends Service
         $room->room_count       = $request->get('rooms');
         $room->bathroom_count   = $request->get('bathrooms');
         $room->user_id          = Auth::user()->id;
+        $room->greater_area_id  = $request->get('greater_areas');
         $room->location_id      = $request->get('locations');
 
         $room->save();
@@ -118,6 +146,13 @@ class RoomService extends Service
         $roomRequirement->save();
     }
 
+    /**
+     * Save room image
+     *
+     * @param Request $request
+     * @param $roomId
+     * @param $pictureName
+     */
     public function saveRoomImage(Request $request, $roomId, $pictureName)
     {
         $file = $request->file($pictureName);
